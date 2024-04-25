@@ -11,10 +11,11 @@ import useSettings from "../../hooks/useSettings";
 const DashboardLayout = () => {
   const { onToggleMode } = useSettings();
   const theme = useTheme();
+  console.log(theme);
   const [selectedButton, setSelectedButton] = useState(0);
 
   return (
-    <>
+    <Box sx={{ display: "flex" }}>
       {/* whole column */}
       <Box
         sx={{
@@ -113,8 +114,8 @@ const DashboardLayout = () => {
           </Stack>{" "}
         </Stack>
       </Box>
-      {/* <Outlet /> */}
-    </>
+      <Outlet />
+    </Box>
   );
 };
 

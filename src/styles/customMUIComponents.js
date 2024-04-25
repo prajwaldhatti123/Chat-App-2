@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Switch } from "@mui/material";
+import { Switch, alpha, InputBase } from "@mui/material";
 export const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -44,5 +44,35 @@ export const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     opacity: 1,
     backgroundColor: theme.palette.mode === "dark" ? "#8796A5" : "#aab4be",
     borderRadius: 20 / 2,
+  },
+}));
+
+export const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  border: "1px solid black",
+  padding: theme.spacing(2),
+  borderRadius: "20",
+  backgroundColor: alpha(theme.palette.background.paper, 1),
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+}));
+
+export const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+export const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    width: "100%",
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
   },
 }));
