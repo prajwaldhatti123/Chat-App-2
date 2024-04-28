@@ -36,7 +36,6 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
             : theme.palette.background.default,
         borderRadius: "1",
         display: "flex",
-        // alignItems: "center",
       }}
     >
       <Stack
@@ -46,7 +45,7 @@ const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
         padding={1}
         justifyContent={"space-between"}
       >
-        <Stack direction={"row"} spacing={2}>
+        <Stack direction={"row"} spacing={2} alignItems={"center"}>
           {online ? (
             <StyledBadge
               // sx={{ width: "10%" }}
