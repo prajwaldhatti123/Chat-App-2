@@ -15,6 +15,7 @@ import { Archive, CircleDashed, MagnifyingGlass } from "phosphor-react";
 import React from "react";
 import { StyledBadge } from "../../styles/customMUIComponents";
 import { faker } from "@faker-js/faker";
+import { ChatList } from "../../data";
 // import {
 //   Search,
 //   SearchIconWrapper,
@@ -22,13 +23,17 @@ import { faker } from "@faker-js/faker";
 // } from "../../styles/customMUIComponents";
 
 // Actual Chats which need to be rendered
-const ChatElement = () => {
+const ChatElement = ({ id, name, img, msg, time, unread, online }) => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
         width: "100%",
-        // height: "7vh",
-        backgroundColor: "white",
+        height: "8vh",
+        backgroundColor:
+          theme.palette.mode === "light"
+            ? "white"
+            : theme.palette.background.default,
         borderRadius: "1",
         display: "flex",
         // alignItems: "center",
@@ -42,25 +47,29 @@ const ChatElement = () => {
         justifyContent={"space-between"}
       >
         <Stack direction={"row"} spacing={2}>
-          <StyledBadge
-            // sx={{ width: "10%" }}
-            overlap="circular"
-            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-            variant="dot"
-          >
+          {online ? (
+            <StyledBadge
+              // sx={{ width: "10%" }}
+              overlap="circular"
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+              variant="dot"
+            >
+              <Avatar alt="Rem Sharp" src={faker.image.avatar()} />
+            </StyledBadge>
+          ) : (
             <Avatar alt="Rem Sharp" src={faker.image.avatar()} />
-          </StyledBadge>
+          )}
           <Stack spacing={0.3}>
-            <Typography variant="subtitle2">Prajwal Dhatti</Typography>
-            <Typography variant="caption">How r u ?</Typography>
+            <Typography variant="subtitle2">{name}</Typography>
+            <Typography variant="caption">{msg}</Typography>
           </Stack>
         </Stack>
         <Stack spacing={1} alignItems={"center"}>
           <Typography sx={{ fontWeight: 600 }} variant="caption">
-            9:52
+            {time}
           </Typography>
           <Typography sx={{ fontWeight: 600 }} variant="caption">
-            <Badge badgeContent={100} color="secondary" />
+            <Badge badgeContent={unread} color="secondary" />
           </Typography>
         </Stack>
       </Stack>
@@ -74,16 +83,18 @@ const Chats = () => {
     <Box
       sx={{
         position: "relative",
-        height: "100vh",
         width: "25rem",
-        backgroundColor: "#f8faff",
+        backgroundColor:
+          theme.palette.mode === "light"
+            ? "#f8faff"
+            : theme.palette.background.paper,
         boxShadow:
           theme.palette.mode === "light"
             ? "0px 0px 2px rgba(0,0,0,0.25)"
             : "0px 0px 2px #fafafa",
       }}
     >
-      <Stack p={3} spacing={3}>
+      <Stack p={3} spacing={3} sx={{ height: "100vh" }}>
         <Stack
           direction={"row"}
           alignItems={"center"}
@@ -108,6 +119,10 @@ const Chats = () => {
           </Search> */}
           <TextField
             variant="outlined"
+            sx={{
+              color: theme.palette.background.paper,
+              backgroundColor: theme.palette.background.paper,
+            }}
             aria-label="search for contacts"
             placeholder="Search...."
             InputProps={{
@@ -119,15 +134,38 @@ const Chats = () => {
             }}
           ></TextField>
         </Stack>
-        <Stack spacing={1}>
+        <Stack>
           <Stack direction={"row"} alignItems={"center"} spacing={2}>
             <Archive size={30}></Archive>
             <Button variant="text">Archived</Button>
           </Stack>
           <Divider sx={{ width: "90%" }}></Divider>
         </Stack>
-        <Stack>
-          <ChatElement />
+        <Stack
+          spacing={2}
+          sx={{
+            flexGrow: 1,
+            overflow: "auto",
+            // overflowY: "scroll",
+            height: "100%",
+          }}
+        >
+          <Stack spacing={2.4}>
+            <Typography variant="subtitle2" sx={{ color: "#676767" }}>
+              Pinned
+            </Typography>
+            {ChatList.filter((el) => el.pinned).map((el) => (
+              <ChatElement {...el}></ChatElement>
+            ))}
+          </Stack>
+          <Stack spacing={2.4}>
+            <Typography variant="subtitle2" sx={{ color: "#676767" }}>
+              All Chats
+            </Typography>
+            {ChatList.filter((el) => !el.pinned).map((el) => (
+              <ChatElement {...el}></ChatElement>
+            ))}
+          </Stack>
         </Stack>
       </Stack>
     </Box>
