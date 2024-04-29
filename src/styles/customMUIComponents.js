@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Switch, alpha, InputBase, Badge } from "@mui/material";
+import { Switch, alpha, InputBase, Badge, Box, TextField } from "@mui/material";
 export const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -68,12 +68,11 @@ export const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
-export const StyledInputBase = styled(InputBase)(({ theme }) => ({
+export const StyledInput = styled(TextField)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    width: "100%",
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingTop: "1rem",
+    paddingBottom: "1rem",
   },
 }));
 
@@ -105,3 +104,27 @@ export const StyledBadge = styled(Badge)(({ theme }) => ({
     },
   },
 }));
+
+// scrollbar
+export const CustomScrollbar = () => {
+  return (
+    <Box
+      sx={{
+        maxHeight: "300px", // Set a maximum height to enable scrolling
+        overflowY: "auto", // Enable vertical scrolling
+        "&::-webkit-scrollbar": {
+          width: "8px", // Width of the scrollbar
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: "#888", // Color of the thumb
+          borderRadius: "4px", // Border radius of the thumb
+        },
+        "&::-webkit-scrollbar-track": {
+          backgroundColor: "#f1f1f1", // Color of the track
+        },
+      }}
+    >
+      {/* Content goes here */}
+    </Box>
+  );
+};

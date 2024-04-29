@@ -20,7 +20,7 @@ const SideNav = () => {
         sx={{
           height: "100vh",
           backgroundColor: theme.palette.background.paper,
-          width: 100,
+          width: "6rem",
           boxShadow: "0px 0px 5px rgba(0,0,0,0.25)",
           padding: "2rem",
         }}

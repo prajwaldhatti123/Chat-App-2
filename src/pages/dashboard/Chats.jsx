@@ -144,9 +144,28 @@ const Chats = () => {
           spacing={2}
           sx={{
             flexGrow: 1,
-            overflow: "auto",
-            // overflowY: "scroll",
+            // overflow: "auto",
             height: "100%",
+            overflowY: "auto", // Enable vertical scrolling
+            "&::-webkit-scrollbar": {
+              width: "6px",
+              opacity: 1,
+              transition: "opacity 0.5s ease-in-out",
+            },
+            "&:hover::-webkit-scrollbar": {
+              opacity: 0, // Hide scrollbar on hover
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor:
+                theme.palette.mode === "light" ? "#888" : "#a1a1a1", // Color of the thumb
+              borderRadius: "4px", // Border radius of the thumb
+            },
+            // "&::-webkit-scrollbar-track": {
+            //   backgroundColor:
+            //     theme.palette.mode === "light"
+            //       ? "#f1f1f1"
+            //       : theme.palette.background.paper, // Color of the track
+            // },
           }}
         >
           <Stack spacing={2.4}>
