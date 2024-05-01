@@ -1,6 +1,6 @@
 import React from "react";
 import Chats from "./Chats";
-import Conversation from "./Conversation";
+import Conversation from "./Conversation/Conversation";
 import { Box } from "@mui/material";
 
 const GeneralApp = () => {
