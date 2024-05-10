@@ -73,6 +73,7 @@ export const StyledInput = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-input": {
     paddingTop: "1rem",
     paddingBottom: "1rem",
+    // backgroundColor: "#deedf8",
   },
 }));
 

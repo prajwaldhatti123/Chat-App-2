@@ -149,11 +149,7 @@ const Chats = () => {
             overflowY: "auto", // Enable vertical scrolling
             "&::-webkit-scrollbar": {
               width: "6px",
-              opacity: 1,
               transition: "opacity 0.5s ease-in-out",
-            },
-            "&:hover::-webkit-scrollbar": {
-              opacity: 0, // Hide scrollbar on hover
             },
             "&::-webkit-scrollbar-thumb": {
               backgroundColor:
