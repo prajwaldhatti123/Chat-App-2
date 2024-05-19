@@ -1,17 +1,36 @@
-import { Avatar, Box, Divider, IconButton, Stack } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  Menu,
+  MenuItem,
+  Stack,
+} from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { Nav_Buttons } from "../../data";
+import { Nav_Buttons, Profile_Menu } from "../../data";
 import { Gear } from "phosphor-react";
 import { faker } from "@faker-js/faker";
 import { MaterialUISwitch } from "../../styles/customMUIComponents";
 import useSettings from "../../hooks/useSettings";
 import { useState } from "react";
+import { roRO } from "@mui/material/locale";
 
 const SideNav = () => {
   const { onToggleMode } = useSettings();
   const theme = useTheme();
   // console.log(theme);
   const [selectedButton, setSelectedButton] = useState(0);
+
+  const [profileAnchorEl, setProfileAnchorEl] = useState(null);
+  const profileOpen = Boolean(profileAnchorEl);
+  const handleProfileClick = (event) => {
+    setProfileAnchorEl(event.currentTarget);
+  };
+  const handleProfileClose = () => {
+    setProfileAnchorEl(null);
+  };
 
   return (
     <>
@@ -109,7 +128,45 @@ const SideNav = () => {
           </Stack>
           <Stack alignItems={"center"} spacing={4}>
             <MaterialUISwitch onChange={onToggleMode}></MaterialUISwitch>
-            <Avatar src={faker.image.avatar()}></Avatar>
+            <IconButton
+              id="sidebar-profile-button"
+              aria-controls={profileOpen ? "sidebar-profile-button" : undefined}
+              aria-haspopup="true"
+              aria-expanded={profileOpen ? "true" : undefined}
+              onClick={handleProfileClick}
+            >
+              <Avatar src={faker.image.avatar()}></Avatar>
+            </IconButton>
+            <Menu
+              id="sidebar-profile-menu"
+              aria-labelledby="sidebar-profile-button"
+              anchorEl={profileAnchorEl}
+              open={profileOpen}
+              onClose={handleProfileClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+            >
+              {Profile_Menu.map((el) => {
+                return (
+                  <MenuItem onClick={handleProfileClose}>
+                    <Stack
+                      direction={"row"}
+                      spacing={2}
+                      justifyContent={"space-between"}
+                    >
+                      <span>{el.title}</span>
+                      {el.icon}
+                    </Stack>
+                  </MenuItem>
+                );
+              })}
+            </Menu>
           </Stack>{" "}
         </Stack>
       </Box>

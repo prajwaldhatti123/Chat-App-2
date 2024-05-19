@@ -1,8 +1,66 @@
 import { useTheme } from "@emotion/react";
 import { faker } from "@faker-js/faker";
-import { Box, Divider, Stack, Typography, Link } from "@mui/material";
-import { Download, DownloadSimple, Image } from "phosphor-react";
+import {
+  Box,
+  Divider,
+  Stack,
+  Typography,
+  Link,
+  MenuItem,
+  Menu,
+  IconButton,
+} from "@mui/material";
+import {
+  DotsThreeVertical,
+  Download,
+  DownloadSimple,
+  Image,
+} from "phosphor-react";
 import React from "react";
+import { Message_options } from "../../../data";
+
+const MessageOptions = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  return (
+    <Box>
+      <IconButton
+        id="demo-positioned-button"
+        aria-controls={open ? "demo-positioned-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+      >
+        <DotsThreeVertical></DotsThreeVertical>
+      </IconButton>
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+      >
+        {Message_options.map((el) => {
+          return <MenuItem onClick={handleClose}>{el.title}</MenuItem>;
+        })}
+      </Menu>
+    </Box>
+  );
+};
 
 // Timeline component
 const Timeline = ({ obj }) => {
@@ -47,6 +105,7 @@ const MsgText = ({ obj }) => {
           {obj.message}{" "}
         </Typography>
       </Box>
+      <MessageOptions></MessageOptions>
     </Stack>
   );
 };
@@ -105,6 +164,7 @@ const MediaMsg = ({ obj }) => {
           </Typography>
         </Stack>
       </Box>
+      <MessageOptions></MessageOptions>
     </Stack>
   );
 };
@@ -149,6 +209,7 @@ const ReplyMsg = ({ obj }) => {
           </Typography>
         </Stack>
       </Box>
+      <MessageOptions></MessageOptions>
     </Stack>
   );
 };
@@ -217,6 +278,7 @@ const LinkMessage = ({ obj }) => {
           </Typography>
         </Stack>
       </Box>
+      <MessageOptions></MessageOptions>
     </Stack>
   );
 };
@@ -267,6 +329,7 @@ const DocMessage = ({ obj }) => {
           </Typography>
         </Stack>
       </Box>
+      <MessageOptions></MessageOptions>
     </Stack>
   );
 };

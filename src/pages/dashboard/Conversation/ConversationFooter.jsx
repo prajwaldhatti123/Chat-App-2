@@ -1,11 +1,47 @@
-import React from "react";
-import { Box, IconButton, InputAdornment, Stack } from "@mui/material";
+import { useState } from "react";
+import {
+  Box,
+  IconButton,
+  InputAdornment,
+  Menu,
+  MenuItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { StyledInput } from "../../../styles/customMUIComponents";
-import { LinkSimple, PaperPlaneTilt, Smiley } from "phosphor-react";
+import {
+  Camera,
+  File,
+  Image,
+  LinkSimple,
+  PaperPlaneTilt,
+  Person,
+  Smiley,
+  Sticker,
+  User,
+} from "phosphor-react";
 import { useTheme } from "@emotion/react";
+import data from "@emoji-mart/data";
+import Picker from "@emoji-mart/react";
 
 const ConversationFooter = () => {
   const theme = useTheme();
+
+  // emoji picker functioning
+  const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
+  const handleEmojiClick = () => {
+    setOpenEmojiPicker((prev) => !prev);
+  };
+
+  // select attachment functioning
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Box
       p={2}
@@ -22,31 +58,102 @@ const ConversationFooter = () => {
       }}
     >
       <Stack direction={"row"} alignItems={"center"} spacing={3}>
-        <StyledInput
-          fullWidth
-          variant="filled"
-          placeholder="Write a message..."
-          InputProps={{
-            disableUnderline: true,
-            startAdornment: (
-              <InputAdornment>
-                <IconButton
-                  aria-label="link any attachments"
-                  sx={{ mr: "1rem" }}
-                >
-                  <LinkSimple></LinkSimple>
-                </IconButton>
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment>
-                <IconButton sx={{ mr: "1rem" }}>
-                  <Smiley></Smiley>
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        ></StyledInput>
+        {/* Emoji picker */}
+        <Stack sx={{ width: "100%" }}>
+          <Box
+            sx={{
+              display: openEmojiPicker ? "inline" : "none",
+              zIndex: 10,
+              bottom: "5rem",
+              right: "5rem",
+              position: "fixed",
+            }}
+          >
+            <Picker
+              theme={theme.palette.mode}
+              data={data}
+              onEmojiSelect={console.log}
+            ></Picker>
+          </Box>
+
+          {/* this is for input textfield */}
+          <StyledInput
+            fullWidth
+            variant="filled"
+            placeholder="Write a message..."
+            InputProps={{
+              disableUnderline: true,
+              startAdornment: (
+                <InputAdornment>
+                  <IconButton
+                    aria-label="link any attachments"
+                    sx={{ mr: "1rem" }}
+                    id="demo-positioned-button"
+                    aria-controls={open ? "demo-positioned-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClick}
+                  >
+                    <LinkSimple></LinkSimple>
+                  </IconButton>
+                  <Menu
+                    id="demo-positioned-menu"
+                    aria-labelledby="demo-positioned-button"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
+                    transformOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                  >
+                    <MenuItem sx={{ mb: "0.3rem" }} onClick={handleClose}>
+                      <Image size={24}></Image>
+                      <Typography variant="subtitle1" ml={2}>
+                        Photos & Videos
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem sx={{ mb: "0.3rem" }} onClick={handleClose}>
+                      <Sticker size={24}></Sticker>
+                      <Typography variant="subtitle1" ml={2}>
+                        Stickers
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem sx={{ mb: "0.3rem" }} onClick={handleClose}>
+                      <Camera size={24}></Camera>
+                      <Typography variant="subtitle1" ml={2}>
+                        Camera
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem sx={{ mb: "0.3rem" }} onClick={handleClose}>
+                      <User size={24}></User>
+                      <Typography variant="subtitle1" ml={2}>
+                        Contact
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem sx={{ mb: "0.3rem" }} onClick={handleClose}>
+                      <File size={24}></File>
+                      <Typography variant="subtitle1" ml={2}>
+                        Documents
+                      </Typography>
+                    </MenuItem>
+                  </Menu>
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton sx={{ mr: "1rem" }} onClick={handleEmojiClick}>
+                    <Smiley></Smiley>
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          ></StyledInput>
+        </Stack>
         <Box
           sx={{
             height: "3rem",
