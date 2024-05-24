@@ -11,8 +11,11 @@ import { StyledBadge } from "../../../styles/customMUIComponents";
 import { faker } from "@faker-js/faker";
 import { CaretDown, MagnifyingGlass, Phone, VideoCamera } from "phosphor-react";
 import { useTheme } from "@emotion/react";
+import { toggleSideBar } from "../../../redux/slices/app";
+import { useDispatch } from "react-redux";
 const ConversationHeader = () => {
   const theme = useTheme();
+  const dispatch = useDispatch();
   return (
     <Box
       sx={{
@@ -34,7 +37,13 @@ const ConversationHeader = () => {
         p={2}
         sx={{ width: "100%", height: "100%" }}
       >
-        <Stack direction={"row"} spacing={2}>
+        <Stack
+          onClick={() => {
+            dispatch(toggleSideBar());
+          }}
+          direction={"row"}
+          spacing={2}
+        >
           <StyledBadge
             overlap="circular"
             anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
