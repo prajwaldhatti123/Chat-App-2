@@ -46,7 +46,7 @@ const Contact = () => {
           p={3}
           spacing={3}
         >
-          <Stack alignItems={"center"} direction={"row"} spacing={2}>
+          <Stack alignItems={"center"} direction={"row"} spacing={4}>
             <Avatar
               src={faker.image.avatar()}
               alt={faker.name.firstName}
