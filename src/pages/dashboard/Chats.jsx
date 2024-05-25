@@ -156,12 +156,6 @@ const Chats = () => {
                 theme.palette.mode === "light" ? "#888" : "#a1a1a1", // Color of the thumb
               borderRadius: "4px", // Border radius of the thumb
             },
-            // "&::-webkit-scrollbar-track": {
-            //   backgroundColor:
-            //     theme.palette.mode === "light"
-            //       ? "#f1f1f1"
-            //       : theme.palette.background.paper, // Color of the track
-            // },
           }}
         >
           <Stack spacing={2.4}>

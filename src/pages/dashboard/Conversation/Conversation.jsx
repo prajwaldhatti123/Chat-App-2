@@ -16,6 +16,7 @@ const Conversation = () => {
         sx={{
           flexGrow: 1,
           overflowY: "auto", // Enable vertical scrolling
+          overflowX: "hidden",
           "&::-webkit-scrollbar": {
             width: "6px",
             transition: "opacity 0.5s ease-in-out",
@@ -28,7 +29,7 @@ const Conversation = () => {
           backgroundImage:
             'url("https://doot-light.react.themesbrand.com/static/media/pattern-05.ffd181cdf9a08b200998.png")',
         }}
-        overflow={"auto"}
+        // overflow={"auto"}
       >
         <Messages></Messages>
         {/* <h1>hello world</h1> */}
