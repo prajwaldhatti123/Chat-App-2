@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Divider,
   IconButton,
   Menu,
@@ -15,7 +14,6 @@ import { faker } from "@faker-js/faker";
 import { MaterialUISwitch } from "../../styles/customMUIComponents";
 import useSettings from "../../hooks/useSettings";
 import { useState } from "react";
-import { roRO } from "@mui/material/locale";
 
 const SideNav = () => {
   const { onToggleMode } = useSettings();
