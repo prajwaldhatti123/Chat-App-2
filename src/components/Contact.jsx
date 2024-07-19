@@ -19,9 +19,9 @@ import {
   X,
 } from "phosphor-react";
 import { useDispatch } from "react-redux";
-import { toggleSideBar } from "../../redux/slices/app";
+import { toggleSideBar, updateSidebarType } from "../redux/slices/app";
 import { faker } from "@faker-js/faker";
-import { IOSSwitch } from "../AntSwitch";
+import { IOSSwitch } from "./AntSwitch";
 
 const Contact = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,10 @@ const Contact = () => {
     <Box
       sx={{
         width: "25rem",
-        boxShadow: "0px 0px 5px rgba(0,0,0,0.25)",
+        boxShadow:
+          theme.palette.mode === "light"
+            ? "0px 0px 2px rgba(0,0,0,0.25)"
+            : "0px 0px 2px #fafafa",
         display: "flex",
         flexDirection: "column",
         height: "100vh",
@@ -39,7 +42,10 @@ const Contact = () => {
       <Stack sx={{ height: "100%" }}>
         <Box
           sx={{
-            boxShadow: "0px 0px 2px rgba(0,0,0,0.25)",
+            boxShadow:
+              theme.palette.mode === "light"
+                ? "0px 0px 2px rgba(0,0,0,0.25)"
+                : "0px 0px 2px #fafafa",
             width: "100%",
             backgroundColor:
               theme.palette.mode === "light"
@@ -57,7 +63,11 @@ const Contact = () => {
             <Typography variant="subtitle2" fontSize={16}>
               Contact Info
             </Typography>
-            <IconButton onClick={() => dispatch(toggleSideBar())}>
+            <IconButton
+              onClick={() => {
+                dispatch(toggleSideBar());
+              }}
+            >
               <X></X>
             </IconButton>
           </Stack>
@@ -65,6 +75,7 @@ const Contact = () => {
         <Box
           sx={{
             height: "100%",
+
             position: "relative",
             overflowY: "auto",
             flexGrow: 1,
@@ -131,7 +142,14 @@ const Contact = () => {
               justifyContent={"space-between"}
             >
               <Typography variant="subtitle2">Media , Links & Docs</Typography>
-              <Button endIcon={<CaretRight></CaretRight>}>225</Button>
+              <Button
+                onClick={() => {
+                  dispatch(updateSidebarType("SHARED"));
+                }}
+                endIcon={<CaretRight></CaretRight>}
+              >
+                225
+              </Button>
             </Stack>
             <Stack direction={"row"} spacing={2} alignItems={"center"}>
               {[1, 2, 3].map((el) => (
@@ -149,7 +167,14 @@ const Contact = () => {
                 <Typography variant="subtitle2">Starred Messages</Typography>
               </Stack>
               <Stack>
-                <CaretRight></CaretRight>
+                <IconButton>
+                  <CaretRight
+                    size={20}
+                    onClick={() => {
+                      dispatch(updateSidebarType("STARRED"));
+                    }}
+                  ></CaretRight>
+                </IconButton>
               </Stack>
             </Stack>
 

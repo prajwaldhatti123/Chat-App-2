@@ -5,7 +5,7 @@ import { dispatch } from "../store";
 let initialState = {
   sidebar: {
     open: false,
-    type: "CONTACT", // This can be changed to starred , shared like -> media , links , docs
+    type: "", // This can be changed to starred , shared like -> media , links , docs
   },
 };
 

@@ -50,9 +50,10 @@ const SideNav = () => {
           sx={{ height: "100%" }}
           spacing={3}
         >
-          <Stack alignItems={"center"} spacing={4}>
+          <Stack alignItems={"center"} spacing={4} key={"logo-stack"}>
             {/* logo */}
             <Box
+              key={"logo-box"}
               sx={{
                 backgroundColor: theme.palette.primary.main,
                 height: 64,

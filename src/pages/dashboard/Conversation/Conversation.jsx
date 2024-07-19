@@ -15,6 +15,7 @@ const Conversation = () => {
         width={"100%"}
         sx={{
           flexGrow: 1,
+          // boxShadow: "0px 0px 5px rgba(0,0,0,0.25)",
           overflowY: "auto", // Enable vertical scrolling
           overflowX: "hidden",
           "&::-webkit-scrollbar": {

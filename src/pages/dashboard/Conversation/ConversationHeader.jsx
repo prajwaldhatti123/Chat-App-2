@@ -11,7 +11,7 @@ import { StyledBadge } from "../../../styles/customMUIComponents";
 import { faker } from "@faker-js/faker";
 import { CaretDown, MagnifyingGlass, Phone, VideoCamera } from "phosphor-react";
 import { useTheme } from "@emotion/react";
-import { toggleSideBar } from "../../../redux/slices/app";
+import { toggleSideBar, updateSidebarType } from "../../../redux/slices/app";
 import { useDispatch } from "react-redux";
 const ConversationHeader = () => {
   const theme = useTheme();
@@ -38,8 +38,14 @@ const ConversationHeader = () => {
         sx={{ width: "100%", height: "100%" }}
       >
         <Stack
+          sx={{
+            ":hover": {
+              cursor: "pointer",
+            },
+          }}
           onClick={() => {
             dispatch(toggleSideBar());
+            dispatch(updateSidebarType("CONTACT"));
           }}
           direction={"row"}
           spacing={2}
